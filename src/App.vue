@@ -48,13 +48,16 @@ export default {
           break
         
         case 'DEL':
-          this.buffer = this.buffer.substring(0, this.buffer.length - 1)
+          if (this.buffer.length == 1)
+            this.buffer = '0'
+          else  
+            this.buffer = this.buffer.substring(0, this.buffer.length - 1)
           break
         
         case '=':
           this.memory += this.buffer
           var e = nerdamer(this.memory)
-          this.buffer = e.text('decimals')
+          this.buffer = Math.round(e.text('decimals') * 1000000) / 1000000
           this.memory = ''
           break
 
@@ -73,13 +76,14 @@ export default {
         case '-':
         case '*':
         case '^':
+        case '/':
           this.memory += ' ' + this.buffer
           this.buffer = '0'
 
           if (this.memory.split(' ').length > 0) {
             console.log('longer than 0')
             var e = nerdamer(this.memory)
-            this.memory = e.text('decimals')
+            this.memory = Math.round(e.text('decimals') * 1000000) / 1000000
           }
 
           this.memory += ' ' + input
