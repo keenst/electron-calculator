@@ -1,10 +1,8 @@
 <template>
-  <div class="bg-neutral-800 h-screen flex flex-col">
+  <div class="bg-white h-screen flex flex-col">
     <div class="h-[200px] flex flex-col items-end justify-end">
-      <div class="text-neutral-500 text-2xl pr-4">{{ memory }}</div>
-      <div class="flex flex-row pr-4 pb-4 h-20 font-semibold">
-        <div v-for="digit in buffer.split('')" class="text-neutral-100 text-6xl">{{ digit }}</div>
-      </div>
+      <div class="text-orange-100 text-2xl pr-4">{{ memory }}</div>
+      <div class="pr-4 pb-4 h-20 font-semibold text-orange-200 text-6xl"> {{ buffer }} </div>
     </div>
     <div class="grid grid-cols-4 gap-1 m-2 grow">
       <key

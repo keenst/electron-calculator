@@ -1,12 +1,10 @@
 <template>
   <div class="
-    w-full h-full flex justify-center items-center
-    text-2xl select-none text-neutral-100 hover:bg-neutral-700
-    hover:outline outline-1 outline-neutral-500
-    ease-out duration-200
+    w-20 h-20 m-auto flex justify-center items-center
+    bg-white text-2xl select-none text-neutral-500 hover:bg-orange-200
+    rounded-3xl
+    ease-out duration-300
     " :class="{
-      [`bg-black`]: dark,
-      [`bg-neutral-900`]: !dark,
       [`bg-sky-900 hover:bg-sky-700`]: index == 19 
     }">
     {{ name }}
