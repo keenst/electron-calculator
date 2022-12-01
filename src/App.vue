@@ -2,7 +2,7 @@
   <div class="bg-neutral-800 h-screen flex flex-col">
     <div class="h-[200px] flex flex-col items-end justify-end">
       <div class="text-neutral-500 text-2xl pr-4">{{ memory }}</div>
-      <div class="flex flex-row pr-4 pb-4 h-20">
+      <div class="flex flex-row pr-4 pb-4 h-20 font-semibold">
         <div v-for="digit in buffer.split('')" class="text-neutral-100 text-6xl">{{ digit }}</div>
       </div>
     </div>
@@ -18,8 +18,8 @@
 </template>
 
 <script>
-import key from "./components/Key.vue";
-import nerdamer from "nerdamer";
+import key from './components/Key.vue';
+import nerdamer from 'nerdamer';
 
 export default {
   components: {
@@ -30,11 +30,11 @@ export default {
       buffer: '0',
       memory: '',
       buttons: [
-        "CE", "C", "^", "DEL",
-        "7", "8", "9", "*",
-        "4", "5", "6", "-",
-        "1", "2", "3", "+",
-        "(-)", "0", ".", "="
+        'CE', '^', '/', 'DEL',
+        '7', '8', '9', '*',
+        '4', '5', '6', '-',
+        '1', '2', '3', '+',
+        '(-)', '0', '.', '='
       ]
     }
   },
@@ -61,7 +61,10 @@ export default {
           break
 
         case '(-)':
-          this.buffer = '-' + this.buffer;
+          if (this.buffer.charAt(0) == '-')
+            this.buffer = this.buffer.substring(1)
+          else
+            this.buffer = '-' + this.buffer;
           break;
 
         case '.':
@@ -71,6 +74,7 @@ export default {
         case '+':
         case '-':
         case '*':
+        case '^':
           this.memory += ' ' + this.buffer
           this.buffer = '0'
 
