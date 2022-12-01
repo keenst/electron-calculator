@@ -75,6 +75,10 @@ export default {
           this.memory = ''
           break
 
+        case '(-)':
+          this.buffer = '-' + this.buffer;
+          break;
+
         case '+':
         case '-':
         case '*':
