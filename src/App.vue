@@ -38,24 +38,33 @@ export default {
   },
   methods: {
     addToBuffer(input) {
-      if (input == 'C' || input == 'CE') {
-        this.buffer = ''
-        this.memory = ''
-      }
-      else if (input == 'DEL') {
-        this.buffer = this.buffer.substring(0, this.buffer.length - 1);
-      }
-      else if (input == '=') {
-        this.memory += this.buffer
-        this.buffer = nerdamer(this.memory);
-        this.memory = ''
-      }
-      else if (input == '+' || input == '-' || input == '*') {
-        this.memory += ' ' + this.buffer + ' ' + input
-        this.buffer = ''
-      }
-      else {
-        this.buffer += input;
+      switch (input) {
+        case 'C':
+        case 'CE':
+          this.buffer = ''
+          this.memory = ''
+          break
+        
+        case 'DEL':
+          this.buffer = this.buffer.substring(0, this.buffer.length - 1)
+          break
+        
+        case '=':
+          this.memory += this.buffer
+          var e = nerdamer(this.memory)
+          this.buffer = e.text('decimals')
+          this.memory = ''
+          break
+
+        case '+':
+        case '-':
+        case '*':
+          this.memory += ' ' + this.buffer + ' ' + input
+          this.buffer = ''
+          break
+
+        default:
+          this.buffer += input
       }
     }
   }
