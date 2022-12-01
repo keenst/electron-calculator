@@ -97,6 +97,11 @@ export default {
           else
             this.buffer += input
       }
+
+      if (this.buffer == '0' && this.memory.length > 0)
+        this.buttons[0] = 'C'
+      else 
+        this.buttons[0] = 'CE'
     },
     getDisplayNum(input) {
       if (input.length > 8)
