@@ -1,8 +1,13 @@
 <template>
   <div class="bg-white h-screen flex flex-col">
     <div class="h-[200px] flex flex-col items-end justify-end">
-      <div class="text-orange-100 text-2xl pr-4"> {{ getDisplayNum(memory) }} </div>
-      <div class="pr-4 pb-4 h-20 font-semibold text-orange-200 text-6xl"> {{ getDisplayNum(buffer) }} </div>
+      <div class="text-orange-100 text-2xl pr-4 select-none"> {{ getDisplayNum(memory) }} </div>
+      <div class="pr-4 pb-4 h-20 font-semibold text-orange-200 flex flex-col items-end justify-end"
+      :class="{
+        [`text-6xl`]: buffer.length <= 12,
+        [`text-5xl`]: buffer.length > 12,
+        [`text-4xl`]: buffer.length > 15,
+      }"> {{ getDisplayNum(buffer) }} </div>
     </div>
     <div class="grid grid-cols-4 gap-1 m-2 grow">
       <key
@@ -92,6 +97,8 @@ export default {
           break
 
         default:
+          if (this.buffer.length >= 20) return
+
           if (this.buffer == '0')
             this.buffer = input
           else
@@ -104,10 +111,18 @@ export default {
         this.buttons[0] = 'CE'
     },
     getDisplayNum(input) {
-      if (input.length > 8)
-        return Number.parseFloat(input).toExponential(8)
-      else
-        return input
+      if (input.length > 20) 
+        return Number.parseFloat(input).toExponential(17)
+      else {
+        if (!input.includes('.')) {
+          return input.replace(/\B(?=(\d{3})+(?!\d))/g, ' ')
+        }
+
+        let numbers = input.split('.')[0]
+        let decimals = input.split('.')[1]
+        numbers = numbers.replace(/\B(?=(\d{3})+(?!\d))/g, ' ')
+        return numbers + '.' + decimals
+      }
     }
   }
 }
