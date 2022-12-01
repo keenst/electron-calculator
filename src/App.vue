@@ -1,8 +1,25 @@
+<style>
+  .list-enter-from,
+  .list-leave-to {
+    opacity: 0;
+    transform: translateX(10px);
+  }
+  .list-move, /* apply transition to moving elements */
+  .list-enter-active,
+  .list-leave-active {
+    transition: all 0.2s cubic-bezier(0.55, 0, 0.1, 1);
+  }
+</style>
+
 <template>
   <div class="bg-neutral-800 h-screen flex flex-col">
     <div class="h-[200px] flex flex-col items-end justify-end">
       <div class="text-neutral-500 text-2xl pr-4">{{ memory }}</div>
-      <div class="text-neutral-100 text-6xl pb-4 pr-4">{{ buffer }}</div>
+      <div class="flex flex-row pr-4 pb-4 h-20">
+        <TransitionGroup name="list" id="test">
+          <div v-for="digit in buffer.split('')" class="text-neutral-100 text-6xl">{{ digit }}</div>
+        </TransitionGroup>
+      </div>
     </div>
     <div class="grid grid-cols-4 gap-1 m-2 grow">
       <key
@@ -25,8 +42,8 @@ export default {
   },
   data() {
     return {
-      buffer: '',
-      memory: '',
+      buffer: ' ',
+      memory: ' ',
       buttons: [
         "CE", "C", "^", "DEL",
         "7", "8", "9", "*",
@@ -41,8 +58,8 @@ export default {
       switch (input) {
         case 'C':
         case 'CE':
-          this.buffer = ''
-          this.memory = ''
+          this.buffer = ' '
+          this.memory = ' '
           break
         
         case 'DEL':
@@ -53,14 +70,14 @@ export default {
           this.memory += this.buffer
           var e = nerdamer(this.memory)
           this.buffer = e.text('decimals')
-          this.memory = ''
+          this.memory = ' '
           break
 
         case '+':
         case '-':
         case '*':
           this.memory += ' ' + this.buffer + ' ' + input
-          this.buffer = ''
+          this.buffer = ' '
           break
 
         default:
