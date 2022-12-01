@@ -10,6 +10,7 @@
   },
   "dependencies": {
     "nerdamer": "^1.1.13",
+    "tw-elements": "^1.0.0-alpha13",
     "vue": "^3.2.45"
   },
   "devDependencies": {
