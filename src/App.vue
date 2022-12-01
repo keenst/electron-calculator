@@ -42,8 +42,8 @@ export default {
   },
   data() {
     return {
-      buffer: ' ',
-      memory: ' ',
+      buffer: '',
+      memory: '',
       buttons: [
         "CE", "C", "^", "DEL",
         "7", "8", "9", "*",
@@ -57,9 +57,11 @@ export default {
     addToBuffer(input) {
       switch (input) {
         case 'C':
+          this.buffer = ''
+          this.memory = ''
+          break;
         case 'CE':
-          this.buffer = ' '
-          this.memory = ' '
+          this.buffer = ''
           break
         
         case 'DEL':
@@ -70,14 +72,23 @@ export default {
           this.memory += this.buffer
           var e = nerdamer(this.memory)
           this.buffer = e.text('decimals')
-          this.memory = ' '
+          this.memory = ''
           break
 
         case '+':
         case '-':
         case '*':
-          this.memory += ' ' + this.buffer + ' ' + input
-          this.buffer = ' '
+          this.memory += ' ' + this.buffer
+          this.buffer = ''
+
+          if (this.memory.split(' ').length > 0) {
+            console.log('longer than 0')
+            var e = nerdamer(this.memory)
+            this.memory = e.text('decimals')
+          }
+
+          this.memory += ' ' + input
+
           break
 
         default:
