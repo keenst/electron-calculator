@@ -1,8 +1,8 @@
 <template>
   <div class="bg-white h-screen flex flex-col">
     <div class="h-[200px] flex flex-col items-end justify-end">
-      <div class="text-orange-100 text-2xl pr-4">{{ memory }}</div>
-      <div class="pr-4 pb-4 h-20 font-semibold text-orange-200 text-6xl"> {{ buffer }} </div>
+      <div class="text-orange-100 text-2xl pr-4"> {{ getDisplayNum(memory) }} </div>
+      <div class="pr-4 pb-4 h-20 font-semibold text-orange-200 text-6xl"> {{ getDisplayNum(buffer) }} </div>
     </div>
     <div class="grid grid-cols-4 gap-1 m-2 grow">
       <key
@@ -57,7 +57,7 @@ export default {
         case '=':
           this.memory += this.buffer
           var e = nerdamer(this.memory)
-          this.buffer = Math.round(e.text('decimals') * 1000000) / 1000000
+          this.buffer = e.text('decimals')
           this.memory = ''
           break
 
@@ -69,7 +69,8 @@ export default {
           break;
 
         case '.':
-          this.buffer += '.'
+          if (!this.buffer.includes('.'))
+            this.buffer += '.'
           break;
 
         case '+':
@@ -83,7 +84,7 @@ export default {
           if (this.memory.split(' ').length > 0) {
             console.log('longer than 0')
             var e = nerdamer(this.memory)
-            this.memory = Math.round(e.text('decimals') * 1000000) / 1000000
+            this.memory = e.text('decimals')
           }
 
           this.memory += ' ' + input
@@ -96,6 +97,12 @@ export default {
           else
             this.buffer += input
       }
+    },
+    getDisplayNum(input) {
+      if (input.length > 8)
+        return Number.parseFloat(input).toExponential(8)
+      else
+        return input
     }
   }
 }
