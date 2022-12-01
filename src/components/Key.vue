@@ -7,7 +7,7 @@
     " :class="{
       [`bg-black`]: dark,
       [`bg-neutral-900`]: !dark,
-      [`bg-sky-700`]: index == 19 
+      [`bg-sky-900 hover:bg-sky-700`]: index == 19 
     }">
     {{ name }}
   </div>
