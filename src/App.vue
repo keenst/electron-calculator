@@ -1,5 +1,5 @@
 <template>
-  <div class="bg-white h-screen flex flex-col rounded-3xl">
+  <div class="bg-white h-screen flex flex-col">
     <div class="h-[200px] flex flex-col items-end justify-end">
       <div class="text-orange-100 text-2xl pr-4 select-none"> {{ getDisplayNum(memory) }} </div>
       <div class="pr-4 pb-4 h-20 font-semibold text-orange-200 flex flex-col items-end justify-end"
