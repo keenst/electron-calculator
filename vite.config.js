@@ -12,6 +12,10 @@ export default defineConfig({
   resolve: {
     alias: {
       "@": fileURLToPath(new URL("./src", import.meta.url)),
+      "icons": path.resolve(__dirname, "node_modules/vue-material-design-icons")
     },
+    extensions: [
+      ".vue"
+    ]
   },
 });

@@ -1,5 +1,17 @@
 <template>
   <div class="bg-white h-screen flex flex-col">
+    <div class="h-[45px] w-full flex flex-row justify-between">
+      <div>
+
+      </div>
+      <div @click="closeApp()" class="
+      hover:bg-red-400 w-[70px] text-neutral-500 hover:text-white
+      transition-all duration-200
+      flex justify-center items-center
+      ">
+        <CloseIcon size="32px" />
+      </div>
+    </div>
     <div class="h-[200px] flex flex-col items-end justify-end">
       <div class="text-orange-100 text-2xl pr-4 select-none"> {{ getDisplayNum(memory) }} </div>
       <div class="pr-4 pb-4 h-20 font-semibold text-orange-200 flex flex-col items-end justify-end"
@@ -21,12 +33,19 @@
 </template>
 
 <script>
-import key from './components/Key.vue';
-import nerdamer from 'nerdamer';
+import key from './components/Key'
+import nerdamer from 'nerdamer'
+import CloseIcon from 'icons/Close'
+
+const { ipcRenderer } = window.require('electron')
 
 export default {
+  setup() {
+    
+  },
   components: {
-    key
+    key,
+    CloseIcon
   },
   data() {
     return {
@@ -38,7 +57,7 @@ export default {
         '4', '5', '6', '-',
         '1', '2', '3', '+',
         '+/-', '0', '.', '='
-      ]
+      ],
     }
   },
   methods: {
@@ -123,6 +142,9 @@ export default {
         numbers = numbers.replace(/\B(?=(\d{3})+(?!\d))/g, ' ')
         return numbers + '.' + decimals
       }
+    },
+    closeApp() {
+      ipcRenderer.send('close', true)
     }
   }
 }
