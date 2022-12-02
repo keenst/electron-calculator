@@ -1,11 +1,11 @@
 <template>
-  <div class="bg-white h-screen flex flex-col">
+  <div class="bg-white h-screen flex flex-col rounded-md drag">
     <div class="h-[45px] w-full flex flex-row justify-between">
-      <div>
+      <div class="no-drag">
 
       </div>
       <div @click="closeApp()" class="
-      hover:bg-red-400 w-[70px] text-neutral-500 hover:text-white
+      hover:bg-red-400 w-[70px] text-neutral-500 hover:text-white no-drag rounded-tr-md rounded-bl-md
       transition-all duration-200
       flex justify-center items-center
       ">
@@ -14,14 +14,14 @@
     </div>
     <div class="h-[200px] flex flex-col items-end justify-end">
       <div class="text-orange-100 text-2xl pr-4 select-none"> {{ getDisplayNum(memory) }} </div>
-      <div class="pr-4 pb-4 h-20 font-semibold text-orange-200 flex flex-col items-end justify-end"
+      <div class="pr-4 pb-4 h-20 font-semibold text-orange-200 flex flex-col items-end justify-end no-drag"
       :class="{
         [`text-6xl`]: buffer.length <= 12,
         [`text-5xl`]: buffer.length > 12,
         [`text-4xl`]: buffer.length > 15,
       }"> {{ getDisplayNum(buffer) }} </div>
     </div>
-    <div class="grid grid-cols-4 gap-1 m-2 grow">
+    <div class="grid grid-cols-4 gap-1 m-2 grow no-drag">
       <key
         @click="addToBuffer(button)"
         v-for="(button, index) in buttons"
@@ -149,3 +149,12 @@ export default {
   }
 }
 </script>
+
+<style>
+.drag {
+  -webkit-app-region: drag;
+}
+.no-drag {
+  -webkit-app-region: no-drag;
+}
+</style>
