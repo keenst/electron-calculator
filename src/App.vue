@@ -1,33 +1,45 @@
 <template>
-  <div class="bg-white h-screen flex flex-col rounded-md drag">
-    <div class="h-[45px] w-full flex flex-row justify-between">
-      <div class="no-drag">
-
+  <div :class="{ [`dark`]: darkMode }">
+    <div class="bg-white h-screen flex flex-col rounded-md drag dark:bg-zinc-900 ease-out duration-300">
+      <div @click="(darkMode = !darkMode)" class="
+      no-drag w-[45px] h-[45px] rounded-full 
+      text-neutral-500 hover:bg-orange-300 hover:text-white
+      dark:text-neutral-400 dark:hover:bg-blue-400 dark:hover:text-zinc-900
+      transition-all duration-300 ease-out
+      flex justify-center items-center absolute m-4 p-6
+      ">
+        <DarkModeIcon v-if="darkMode" size="32px" />
+        <LightModeIcon v-if="!darkMode" size="32px "/>
       </div>
       <div @click="closeApp()" class="
-      hover:bg-red-400 w-[70px] text-neutral-500 hover:text-white no-drag rounded-tr-md rounded-bl-md
-      transition-all duration-200
-      flex justify-center items-center
+      hover:bg-red-400 w-[70px] h-[45px] text-neutral-500 dark:text-neutral-400 hover:text-white
+      dark:hover:bg-rose-400 dark:hover:text-white
+      no-drag rounded-tr-md rounded-bl-md
+      transition-all duration-300 ease-out
+      flex justify-center items-center ml-auto
       ">
         <CloseIcon size="32px" />
       </div>
-    </div>
-    <div class="h-[200px] flex flex-col items-end justify-end">
-      <div class="text-orange-100 text-2xl pr-4 select-none"> {{ getDisplayNum(memory) }} </div>
-      <div class="pr-4 pb-4 h-20 font-semibold text-orange-200 flex flex-col items-end justify-end no-drag"
-      :class="{
-        [`text-6xl`]: buffer.length <= 12,
-        [`text-5xl`]: buffer.length > 12,
-        [`text-4xl`]: buffer.length > 15,
-      }"> {{ getDisplayNum(buffer) }} </div>
-    </div>
-    <div class="grid grid-cols-4 gap-1 m-2 grow no-drag">
-      <key
-        @click="addToBuffer(button)"
-        v-for="(button, index) in buttons"
-        :name="button"
-        :index="index"
-      ></key>
+      <div class="h-[200px] flex flex-col items-end justify-end">
+        <div class="
+        text-orange-100 text-2xl pr-4 select-none dark:text-blue-600 "> {{ getDisplayNum(memory) }} </div>
+        <div class="
+        pr-4 pb-4 h-20 font-semibold text-orange-300 flex flex-col items-end justify-end no-drag
+        dark:text-blue-400 ease-out duration-300
+        " :class="{
+          [`text-6xl`]: buffer.length <= 12,
+          [`text-5xl`]: buffer.length > 12,
+          [`text-4xl`]: buffer.length > 15,
+        }"> {{ getDisplayNum(buffer) }} </div>
+      </div>
+      <div class="grid grid-cols-4 gap-1 m-2 grow no-drag">
+        <key
+          @click="addToBuffer(button)"
+          v-for="(button, index) in buttons"
+          :name="button"
+          :index="index"
+        ></key>
+      </div>
     </div>
   </div>
 </template>
@@ -36,6 +48,8 @@
 import key from './components/Key'
 import nerdamer from 'nerdamer'
 import CloseIcon from 'icons/Close'
+import DarkModeIcon from 'icons/WeatherNight'
+import LightModeIcon from 'icons/WhiteBalanceSunny'
 
 const { ipcRenderer } = window.require('electron')
 
@@ -45,7 +59,9 @@ export default {
   },
   components: {
     key,
-    CloseIcon
+    CloseIcon,
+    DarkModeIcon,
+    LightModeIcon
   },
   data() {
     return {
@@ -58,6 +74,7 @@ export default {
         '1', '2', '3', '+',
         '+/-', '0', '.', '='
       ],
+      darkMode: true
     }
   },
   methods: {
