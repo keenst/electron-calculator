@@ -5,7 +5,7 @@
       no-drag w-[45px] h-[45px] rounded-full 
       text-neutral-500 hover:bg-orange-300 hover:text-white
       dark:text-neutral-400 dark:hover:bg-blue-400 dark:hover:text-zinc-900
-      transition-all duration-300 ease-out
+      transition-all duration-300 ease-out cursor-pointer
       flex justify-center items-center absolute m-4 p-6
       ">
         <DarkModeIcon v-if="darkMode" size="32px" />
@@ -14,7 +14,7 @@
       <div @click="closeApp()" class="
       hover:bg-red-400 w-[70px] h-[45px] text-neutral-500 dark:text-neutral-400 hover:text-white
       dark:hover:bg-rose-400 dark:hover:text-white
-      no-drag rounded-tr-md rounded-bl-md
+      no-drag rounded-tr-md rounded-bl-md cursor-pointer
       transition-all duration-300 ease-out
       flex justify-center items-center ml-auto
       ">
@@ -22,10 +22,10 @@
       </div>
       <div class="h-[200px] flex flex-col items-end justify-end">
         <div class="
-        text-orange-100 text-2xl pr-4 select-none dark:text-blue-600 "> {{ getDisplayNum(memory) }} </div>
+        text-orange-100 text-2xl pr-4 select-none dark:text-blue-600"> {{ getDisplayNum(memory) }} </div>
         <div class="
         pr-4 pb-4 h-20 font-semibold text-orange-300 flex flex-col items-end justify-end no-drag
-        dark:text-blue-400 ease-out duration-300
+        dark:text-blue-400 ease-out duration-300 cursor-text
         " :class="{
           [`text-6xl`]: buffer.length <= 12,
           [`text-5xl`]: buffer.length > 12,
