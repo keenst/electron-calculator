@@ -5,8 +5,8 @@
     rounded-3xl
     ease-out duration-300
     " :class="{
-      [`bg-white hover:bg-orange-200`]: index != 19,
-      [`bg-orange-50 hover:bg-orange-300`]: index == 19 
+      [`hover:bg-orange-200 dark:hover:bg-zinc-800`]: index != 19,
+      [`bg-orange-50 hover:bg-orange-300 dark:bg-zinc-800 dark:hover:bg-zinc-700`]: index == 19 
     }">
     {{ name }}
   </div>
