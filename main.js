@@ -18,7 +18,7 @@ function createWindow () {
 
   win.loadFile('dist/index.html')
 
-  ipcMain.on('close', (event,data) => {
+  ipcMain.on('close', () => {
     app.quit()
   })
 }
