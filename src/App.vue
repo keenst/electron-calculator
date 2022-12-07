@@ -22,9 +22,9 @@
       </div>
       <div class="h-[200px] flex flex-col items-end justify-end">
         <div class="
-        text-orange-100 text-2xl pr-4 select-none dark:text-blue-600"> {{ memoryDisplay }} </div>
+        text-orange-100 text-2xl mr-4 select-none dark:text-blue-600"> {{ memoryDisplay }} </div>
         <div @click="copyToClipboard()" class="
-        pr-4 pb-4 h-20 font-semibold text-orange-300 flex flex-col items-end justify-end no-drag
+        mr-4 mb-4 font-semibold text-orange-300 flex flex-col items-end justify-end no-drag
         dark:text-blue-400 ease-out duration-300 cursor-pointer
         " :class="{
           [`text-6xl`]: bufferDisplay.length <= 11,
