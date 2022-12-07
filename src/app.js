@@ -7,6 +7,13 @@ const { ipcRenderer } = window.require('electron')
 const { clipboard } = require('electron')
 
 export default {
+    mounted() {
+        var binds = [ ['del', 'c'], '^', '/', 'backspace', '7', '8', '9', '*', '4', '5', '6', '-', '1', '2', '3', '+', '', '0', '.', 'enter' ]
+
+        for (let i = 0; i < binds.length; i++) {
+            this.$mousetrap.bind(binds[i], () => { this.addToBuffer(this.buttons[i]) })
+        }
+    },
     components: {
         key,
         CloseIcon,
