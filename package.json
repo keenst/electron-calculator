@@ -13,7 +13,8 @@
   "dependencies": {
     "tw-elements": "^1.0.0-alpha13",
     "vue": "^3.2.45",
-    "vue-material-design-icons": "^5.1.2"
+    "vue-material-design-icons": "^5.1.2",
+    "vue-mousetrap": "^1.0.5"
   },
   "devDependencies": {
     "@rushstack/eslint-patch": "^1.1.4",
