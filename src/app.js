@@ -4,6 +4,7 @@ import DarkModeIcon from 'icons/WeatherNight'
 import LightModeIcon from 'icons/WhiteBalanceSunny'
 
 const { ipcRenderer } = window.require('electron')
+const { clipboard } = require('electron')
 
 export default {
     components: {
@@ -209,6 +210,9 @@ export default {
             this.showingResult = true
             this.prevOperator = operator
             this.operator = ''
+        },
+        copyToClipboard() {
+            clipboard.writeText(this.buffer)
         }
     }
 }
