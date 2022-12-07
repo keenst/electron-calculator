@@ -31,7 +31,8 @@ export default {
             ],
             darkMode: true,
             showingResult: false,
-            startDecimal: false
+            startDecimal: false,
+            showCopyMessage: false
         }
     },
     methods: {
@@ -211,8 +212,13 @@ export default {
             this.prevOperator = operator
             this.operator = ''
         },
-        copyToClipboard() {
-            clipboard.writeText(this.buffer)
+        async copyToClipboard() {
+            clipboard.writeText(this.buffer.toString())
+            this.showCopyMessage = true
+
+            setTimeout(() => {
+                this.showCopyMessage = false
+            }, 1000)
         }
     }
 }

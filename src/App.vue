@@ -25,13 +25,23 @@
         text-orange-100 text-2xl mr-4 select-none dark:text-blue-600"> {{ memoryDisplay }} </div>
         <div @click="copyToClipboard()" class="
         mr-4 mb-4 font-semibold text-orange-300 flex flex-col items-end justify-end no-drag
-        dark:text-blue-400 ease-out duration-300 cursor-pointer
+        dark:text-blue-400 ease-out duration-300 cursor-pointer select-none
         " :class="{
           [`text-6xl`]: bufferDisplay.length <= 11,
           [`text-5xl`]: bufferDisplay.length > 11,
           [`text-4xl`]: bufferDisplay.length > 14
         }"> {{ bufferDisplay }} </div>
       </div>
+      <Transition>
+        <div v-if="showCopyMessage" class="
+        absolute top-[228px] right-4 text-lg
+        dark:text-neutral-500 text-neutral-400
+        transition ease-out duration-300
+        select-none
+        ">
+            Copied!
+        </div>
+      </Transition>
       <div class="grid grid-cols-4 gap-1 m-2 grow no-drag">
         <key
           @click="addToBuffer(button)"
@@ -45,6 +55,7 @@
 </template>
 
 <script>
+  import { Transition } from 'vue';
   import App from './app.js'
   export default App
 </script>
@@ -55,5 +66,9 @@
 }
 .no-drag {
   -webkit-app-region: no-drag;
+}
+.v-enter-from,
+.v-leave-to {
+  opacity: 0;
 }
 </style>
