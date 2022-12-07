@@ -4,6 +4,7 @@ import DarkModeIcon from 'icons/WeatherNight'
 import LightModeIcon from 'icons/WhiteBalanceSunny'
 
 const { ipcRenderer } = window.require('electron')
+const { clipboard } = require('electron')
 
 export default {
     components: {
@@ -30,7 +31,8 @@ export default {
             ],
             darkMode: true,
             showingResult: false,
-            startDecimal: false
+            startDecimal: false,
+            showCopyMessage: false
         }
     },
     methods: {
@@ -209,6 +211,14 @@ export default {
             this.showingResult = true
             this.prevOperator = operator
             this.operator = ''
+        },
+        async copyToClipboard() {
+            clipboard.writeText(this.buffer.toString())
+            this.showCopyMessage = true
+
+            setTimeout(() => {
+                this.showCopyMessage = false
+            }, 1000)
         }
     }
 }
