@@ -24,7 +24,6 @@ function createWindow () {
   })
 
   ipcMain.on('toggleIcon', (event, dark) => {
-    console.log(dark)
     if (dark) {
       win.setIcon(__dirname + '/src/assets/dark-icon.ico')
     } else {
