@@ -119,13 +119,18 @@ export default {
                 case 'DEL':
                     if (this.buffer == 0) break
 
+                    let lastDecimal = false
+
                     if (this.buffer.toString().length == 1) {
                         this.buffer = 0
                     } else {
+                        if (this.buffer.toString().charAt(this.buffer.toString().length - 2) == '.') lastDecimal = true
                         this.buffer = parseFloat(this.buffer.toString().slice(0, -1))
                     }
 
                     this.bufferDisplay = this.getDisplayNum(this.buffer)
+                    this.bufferDisplay += lastDecimal ? '.' : ''
+                    this.startDecimal = lastDecimal
 
                     break
 
