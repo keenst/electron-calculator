@@ -8,10 +8,10 @@
       transition-all duration-300 ease-out cursor-pointer
       flex flex-col justify-center items-center absolute m-4 p-6 overflow-hidden
       ">
-        <TransitionGroup name="toggle">
+        <Transition name="toggle" mode="out-in">
           <DarkModeIcon v-if="darkMode" size="32px" />
-          <LightModeIcon v-if="!darkMode" size="32px "/>
-        </TransitionGroup>
+          <LightModeIcon v-else size="32px" />
+        </Transition>
       </div>
       <div @click="closeApp()" class="
       hover:bg-red-400 w-[70px] h-[45px] text-neutral-500 dark:text-neutral-400 hover:text-white
@@ -57,7 +57,7 @@
 </template>
 
 <script>
-  import { Transition, TransitionGroup } from 'vue';
+  import { Transition } from 'vue';
   import App from './app.js'
   export default App
 </script>
@@ -69,19 +69,14 @@
 .no-drag {
   -webkit-app-region: no-drag;
 }
-.copy-enter-from,
-.copy-leave-to {
-  opacity: 0;
+.toggle-enter-active,
+.toggle-leave-active {
+  transition: all 0.2s ease-out;
 }
 .toggle-enter-from {
-  bottom: 30px;
-  transition: 0.5s ease-out;
-  transform: translateY(-30px);
-  position: absolute;
+  transform: translateY(30px);
 }
 .toggle-leave-to {
-  transition: 0.5s ease-in;
   transform: translateY(-30px);
-  position: absolute;
 }
 </style>
