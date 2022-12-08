@@ -5,6 +5,7 @@ import LightModeIcon from 'icons/WhiteBalanceSunny'
 
 const { ipcRenderer } = window.require('electron')
 const { clipboard } = require('electron')
+const { remote } = window.require('electron')
 
 export default {
     mounted() {
@@ -231,6 +232,10 @@ export default {
             setTimeout(() => {
                 this.showCopyMessage = false
             }, 1000)
+        },
+        toggleTheme() {
+            this.darkMode = !this.darkMode
+            ipcRenderer.send('toggleIcon', this.darkMode)
         }
     }
 }

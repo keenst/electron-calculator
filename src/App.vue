@@ -1,7 +1,7 @@
 <template>
   <div :class="{ [`dark`]: darkMode }">
     <div class="bg-white h-screen flex flex-col rounded-md drag dark:bg-zinc-900 ease-out duration-300">
-      <div @click="(darkMode = !darkMode)" class="
+      <div @click="toggleTheme()" class="
       no-drag w-[45px] h-[45px] rounded-full 
       text-neutral-500 hover:bg-orange-300 hover:text-white
       dark:text-neutral-400 dark:hover:bg-blue-400 dark:hover:text-zinc-900
