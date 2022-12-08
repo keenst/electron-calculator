@@ -1,5 +1,7 @@
 {
   "name": "electron-calculator",
+  "author": "keenest",
+  "description": "Simple calculator made as a practice project",
   "version": "0.0.0",
   "private": true,
   "main": "main.js",
@@ -8,15 +10,26 @@
     "build": "vite build",
     "preview": "vite preview",
     "lint": "eslint . --ext .vue,.js,.jsx,.cjs,.mjs --fix --ignore-path .gitignore",
-    "start": "vite build && electron ."
+    "electron": "vite build && . electron",
+    "start": "electron-forge start",
+    "package": "electron-forge package",
+    "make": "electron-forge make",
+    "publish": "electron-forge publish"
   },
   "dependencies": {
+    "electron-squirrel-startup": "^1.0.0",
     "tw-elements": "^1.0.0-alpha13",
     "vue": "^3.2.45",
     "vue-material-design-icons": "^5.1.2",
     "vue-mousetrap": "^1.0.5"
   },
   "devDependencies": {
+    "@electron-forge/cli": "^6.0.4",
+    "@electron-forge/maker-deb": "^6.0.4",
+    "@electron-forge/maker-rpm": "^6.0.4",
+    "@electron-forge/maker-squirrel": "^6.0.4",
+    "@electron-forge/maker-zip": "^6.0.4",
+    "@electron-forge/publisher-github": "^6.0.4",
     "@rushstack/eslint-patch": "^1.1.4",
     "@vitejs/plugin-vue": "^3.2.0",
     "@vue/eslint-config-prettier": "^7.0.0",
