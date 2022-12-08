@@ -6,10 +6,12 @@
       text-neutral-500 hover:bg-orange-300 hover:text-white
       dark:text-neutral-400 dark:hover:bg-blue-400 dark:hover:text-zinc-900
       transition-all duration-300 ease-out cursor-pointer
-      flex justify-center items-center absolute m-4 p-6
+      flex flex-col justify-center items-center absolute m-4 p-6 overflow-hidden
       ">
-        <DarkModeIcon v-if="darkMode" size="32px" />
-        <LightModeIcon v-if="!darkMode" size="32px "/>
+        <Transition name="toggle" mode="out-in">
+          <DarkModeIcon v-if="darkMode" size="32px" />
+          <LightModeIcon v-else size="32px" />
+        </Transition>
       </div>
       <div @click="closeApp()" class="
       hover:bg-red-400 w-[70px] h-[45px] text-neutral-500 dark:text-neutral-400 hover:text-white
@@ -32,14 +34,14 @@
           [`text-4xl`]: bufferDisplay.length > 14
         }"> {{ bufferDisplay }} </div>
       </div>
-      <Transition>
+      <Transition name="copy">
         <div v-if="showCopyMessage" class="
         absolute top-[228px] right-4 text-lg
         dark:text-neutral-500 text-neutral-400
         transition ease-out duration-300
         select-none
         ">
-            Copied!
+          Copied!
         </div>
       </Transition>
       <div class="grid grid-cols-4 gap-1 m-2 grow no-drag">
@@ -67,8 +69,14 @@
 .no-drag {
   -webkit-app-region: no-drag;
 }
-.v-enter-from,
-.v-leave-to {
-  opacity: 0;
+.toggle-enter-active,
+.toggle-leave-active {
+  transition: all 0.2s ease-out;
+}
+.toggle-enter-from {
+  transform: translateY(30px);
+}
+.toggle-leave-to {
+  transform: translateY(-30px);
 }
 </style>
