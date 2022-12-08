@@ -13,13 +13,22 @@ function createWindow () {
     resizable: false,
     transparent: true,
     frame: false,
-    fullscreenable: false
+    fullscreenable: false,
+    icon: __dirname + '/src/assets/dark-icon.ico'
   })
 
   win.loadFile('dist/index.html')
 
   ipcMain.on('close', () => {
     app.quit()
+  })
+
+  ipcMain.on('toggleIcon', (event, dark) => {
+    if (dark) {
+      win.setIcon(__dirname + '/src/assets/dark-icon.ico')
+    } else {
+      win.setIcon(__dirname + '/src/assets/light-icon.ico')
+    }
   })
 }
 
